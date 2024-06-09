@@ -10,7 +10,7 @@
         <div class="p-8">
             <h1 class="text-4xl font-semibold mb-4 text-white">Tambah Barang</h1>
             <div class="mt-8 h-max rounded-xl max-w-lg">
-                <form action="/barang" method="POST">
+                <form action="/barang" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label class="form-control w-full mt-2">
                         <div class="label">
@@ -56,7 +56,7 @@
                         <div class="label">
                             <span class="label-text">Gambar</span>
                         </div>
-                        <input name="gambar" type="file" placeholder="Tulis disini"
+                        <input name="gambar" type="file" accept="image/*" placeholder="Tulis disini"
                             class="file-input input-bordered w-full" value="{{ old('gambar') }}" />
                         @error('gambar')
                             <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
@@ -72,6 +72,7 @@
                             <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                         @enderror
                     </label>
+                    
                     <label class="form-control w-full mt-2">
                         <div class="label">
                                 <span class="label-text">Pembaruan (Opsional)</span>

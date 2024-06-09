@@ -60,15 +60,6 @@
                     </label>
                     <label class="form-control w-full mt-2">
                         <div class="label">
-                            <span class="label-text">Pembaruan</span>
-                        </div>
-                        <input name="pembaruan" type="text" placeholder="Tulis disini" class="input input-bordered w-full" value="{{ old("pembaruan") ?? $barang->pembaruan }}"/>
-                        @error("pembaruan")
-                            <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                        @enderror
-                    </label>
-                    <label class="form-control w-full mt-2">
-                        <div class="label">
                             <span class="label-text">Tanggal barang masuk</span>
                         </div>
                         <input name="tgl_masuk" type="date" placeholder="Tulis disini" class="input input-bordered w-full" value="{{ old("tgl_masuk") ?? $barang->tgl_masuk }}"/>
@@ -78,7 +69,7 @@
                     </label>
                     <label class="form-control w-full mt-2">
                         <div class="label">
-                            <span class="label-text">Tanggal pembaruan</span>
+                            <span class="label-text">Tanggal pembaruan (Opsional)</span>
                         </div>
                         <input name="tgl_pembaruan" type="date" placeholder="Tulis disini" class="input input-bordered w-full" value="{{ old("tgl_pembaruan") ?? $barang->tgl_pembaruan }}"/>
                         @error("tgl_pembaruan")

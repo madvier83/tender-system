@@ -33,10 +33,10 @@
                                 <td>{{ $barang->merek }}</td>
                                 <td>{{ $barang->kualitas }}</td>
                                 <td>
-                                    
-                                    <div class="bg-white rounded-lg w-16 h-16 my-2"
+
+                                    <div class="bg-white rounded-lg w-16 h-16 my-2 flex items-center justify-center overflow-clip"
                                         onClick={document.getElementById('gambarBarang{{ $barang->id }}').showModal()}>
-                                        <img src="/img/barang.png" alt="barang">
+                                        <img src="{{ asset('storage/gambar/' . $barang->gambar) }}" alt="Gambar">
                                     </div>
 
                                     <dialog id="gambarBarang{{ $barang->id }}" className="modal">
@@ -44,7 +44,8 @@
                                             <div class="p-8">
                                                 <h3 className="font-bold text-lg">{{ $barang->nama }}</h3>
                                                 <div class="bg-white rounded-lg my-2">
-                                                    <img src="/img/barang.png" alt="barang">
+                                                    <img src="{{ asset('storage/gambar/' . $barang->gambar) }}"
+                                                        alt="Gambar">
                                                 </div>
                                                 <button class="btn btn-ghost w-full"
                                                     onClick={document.getElementById('gambarBarang{{ $barang->id }}').close()}>Close

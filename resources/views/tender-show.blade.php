@@ -10,7 +10,7 @@
         <div class="p-8 flex justify-center">
             <div class="">
 
-                <div class="flex gap-16">
+                <div class="flex gap-32">
                     <div class=" w-[30vw]">
                         <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Tender {{ $tender->judul }}</h1>
                         <p class="max-w-xl">{{ $tender->deskripsi }}</p>
@@ -179,20 +179,20 @@
                                             <td class="px-0">Gambar</td>
                                             <td>:</td>
                                             <td>
-                                                <div class="bg-white rounded-lg w-32 h-32 my-2"
-                                                    onClick="{document.getElementById('gambarBarang').showModal()}">
-                                                    <img src="/img/barang.png" alt="barang">
+                                                <div class="bg-gray-700 rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-hidden"
+                                                    onClick="{document.getElementById('gambarBarang{{ $penawaran->id }}').showModal()}">
+                                                    <img src="{{ asset('storage/gambar/' . $penawaran->gambar) }}" alt="Gambar">
                                                 </div>
 
-                                                <dialog id="gambarBarang" className="modal">
+                                                <dialog id="gambarBarang{{ $penawaran->id }}" className="modal">
                                                     <div className="modal-box bg-gray-900">
                                                         <div class="p-8">
                                                             <h3 className="font-bold text-lg"></h3>
                                                             <div class="bg-white rounded-lg my-2">
-                                                                <img src="/img/barang.png" alt="barang">
+                                                                <img src="{{ asset('storage/gambar/' . $penawaran->gambar) }}" alt="Gambar">
                                                             </div>
                                                             <button class="btn btn-ghost w-full"
-                                                                onClick="{document.getElementById('gambarBarang').close()}">Close
+                                                                onClick="{document.getElementById('gambarBarang{{ $penawaran->id }}').close()}">Close
                                                                 X</button>
                                                         </div>
                                                     </div>

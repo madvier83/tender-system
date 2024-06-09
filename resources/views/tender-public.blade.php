@@ -105,7 +105,8 @@
                         @if ($now >= $tglBuka && $now <= $tglTutup)
                             <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Form Pengajuan Penawaran Barang</h1>
 
-                            <form action="/tender-public/{{ $tender->id }}" method="POST">
+                            <form action="/tender-public/{{ $tender->id }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="tender_id" value="{{ $tender->id }}">
                                 <div class="flex flex-col gap-8">
@@ -191,7 +192,7 @@
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
                                             </label>
-                                            <label class="form-control w-full mt-2">
+                                            {{-- <label class="form-control w-full mt-2">
                                                 <div class="label">
                                                     <span class="label-text">Merek</span>
                                                 </div>
@@ -201,18 +202,67 @@
                                                 @error('merek')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
-                                            </label>
-                                            <label class="form-control w-full mt-2">
-                                                <div class="label">
-                                                    <span class="label-text">Kualitas barang</span>
-                                                </div>
-                                                <input name="kualitas" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('kualitas') }}">
-                                                @error('kualitas')
-                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                                                @enderror
-                                            </label>
+                                            </label> --}}
+                                            <div class="flex gap-2">
+                                                <label class="form-control w-full mt-2">
+                                                    <div class="label">
+                                                        <span class="label-text">Merek</span>
+                                                    </div>
+                                                    <input name="kualitas" type="text" placeholder="Tulis disini"
+                                                        class="input input-bordered w-full"
+                                                        value="{{ old('kualitas') }}">
+                                                    @error('kualitas')
+                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                    @enderror
+                                                </label>
+                                                <label class="form-control mt-2 w-24">
+                                                    <div class="label">
+                                                        <span class="label-text">Bobot</span>
+                                                    </div>
+                                                    <select name="bobot_kuantitas" type="number"
+                                                        placeholder="Tulis disini" class="input input-bordered w-full"
+                                                        value="{{ old('kuantitas') }}">
+                                                        @for ($i = 1; $i <= 10; $i++)
+                                                            <option value="{{ $i }}"
+                                                                {{ old('kuantitas') == $i ? 'selected' : '' }}>
+                                                                {{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                    @error('kualitas')
+                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                    @enderror
+                                                </label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <label class="form-control w-full mt-2">
+                                                    <div class="label">
+                                                        <span class="label-text">Kualitas barang</span>
+                                                    </div>
+                                                    <input name="kualitas" type="text" placeholder="Tulis disini"
+                                                        class="input input-bordered w-full"
+                                                        value="{{ old('kualitas') }}">
+                                                    @error('kualitas')
+                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                    @enderror
+                                                </label>
+                                                <label class="form-control mt-2 w-24">
+                                                    <div class="label">
+                                                        <span class="label-text">Bobot</span>
+                                                    </div>
+                                                    <select name="bobot_kuantitas" type="number"
+                                                        placeholder="Tulis disini" class="input input-bordered w-full"
+                                                        value="{{ old('kuantitas') }}">
+                                                        @for ($i = 1; $i <= 10; $i++)
+                                                            <option value="{{ $i }}"
+                                                                {{ old('kuantitas') == $i ? 'selected' : '' }}>
+                                                                {{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                    @error('kualitas')
+                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                    @enderror
+                                                </label>
+                                            </div>
                                             <label class="form-control w-full mt-2">
                                                 <div class="label">
                                                     <span class="label-text">Satuan</span>
@@ -239,9 +289,24 @@
                                                 <div class="label">
                                                     <span class="label-text">Kuantitas barang</span>
                                                 </div>
-                                                <input name="kuantitas" type="number" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('kuantitas') }}">
+                                                <div class="flex">
+                                                    <input name="kuantitas" type="number" placeholder="Tulis disini"
+                                                        class="input input-bordered w-full"
+                                                        value="{{ old('kuantitas') }}">
+                                                </div>
+                                                @error('kuantitas')
+                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </label>
+                                            <label class="form-control w-full mt-2">
+                                                <div class="label">
+                                                    <span class="label-text">Kuantitas barang</span>
+                                                </div>
+                                                <div class="flex">
+                                                    <input name="kuantitas" type="number" placeholder="Tulis disini"
+                                                        class="input input-bordered w-full"
+                                                        value="{{ old('kuantitas') }}">
+                                                </div>
                                                 @error('kuantitas')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
@@ -250,7 +315,8 @@
                                                 <div class="label">
                                                     <span class="label-text">Gambar</span>
                                                 </div>
-                                                <input name="gambar" type="file" placeholder="Tulis disini"
+                                                <input name="gambar" type="file" accept="image/*"
+                                                    placeholder="Tulis disini"
                                                     class="file-input input-bordered w-full"
                                                     value="{{ old('gambar') }}" />
                                                 @error('gambar')

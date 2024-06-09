@@ -10,7 +10,7 @@
         <div class="p-8 flex justify-center">
             <div class="">
 
-                <div class="flex gap-16">
+                <div class="flex gap-32">
                     <div class=" w-[30vw]">
                         <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Tender {{ $tender->judul }}</h1>
                         <p class="max-w-xl">{{ $tender->deskripsi }}</p>
@@ -212,6 +212,9 @@
                                     </table>
                                 </div>
 
+                                @if (count($tender->penawaran) > 1)
+                                    <h1 class="text-xl font-semibold mb-2 mt-4">Penawaran Lainnya</h1>
+                                @endif
 
                                 @foreach ($tender->penawaran as $penawaran)
                                     @if (!$loop->first)

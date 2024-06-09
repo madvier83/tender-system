@@ -69,10 +69,18 @@ class PenawaranController extends Controller
             'satuan' => 'required|integer',
             'harga' => 'required|numeric|min:0',
             'kuantitas' => 'required|integer|min:1',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
             'tgl_masuk' => 'required|date',
             'tgl_pembaruan' => 'nullable|date',
         ]);
+
+        // Store the image
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('public/gambar', $filename);
+            $validated['gambar'] = $filename;
+        }
 
         Penawaran::create($validated);
 

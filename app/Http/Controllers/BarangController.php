@@ -41,6 +41,14 @@ class BarangController extends Controller
             ]
         );
 
+        // Store the image
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('public/gambar', $filename);
+            $validated['gambar'] = $filename;
+        }
+
         Barang::create($validated);
 
         return redirect("/barang");
