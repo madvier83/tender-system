@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PenawaranController;
+use App\Http\Controllers\TenderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('barang', BarangController::class);
+    Route::resource('tender', TenderController::class);
+    Route::resource('penawaran', PenawaranController::class)->except("show");
+});
+
+Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
+
+Route::get('tender-public/{id}', [TenderController::class, 'publicShow']);
+Route::post('tender-public/{id}', [PenawaranController::class, 'publicStore']);
+Route::get('tender-public/{id}/success', [TenderController::class, 'publicSuccess']);
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+require __DIR__ . '/auth.php';
