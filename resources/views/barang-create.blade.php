@@ -54,6 +54,16 @@
                     </label>
                     <label class="form-control w-full mt-2">
                         <div class="label">
+                            <span class="label-text">Kuantitas</span>
+                        </div>
+                        <input name="kuantitas" type="text" placeholder="Tulis disini"
+                            class="input input-bordered w-full" value="{{ old('kuantitas') }}" />
+                        @error('kuantitas')
+                            <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                        @enderror
+                    </label>
+                    <label class="form-control w-full mt-2">
+                        <div class="label">
                             <span class="label-text">Gambar</span>
                         </div>
                         <input name="gambar" type="file" accept="image/*" placeholder="Tulis disini"

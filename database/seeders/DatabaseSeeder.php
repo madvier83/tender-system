@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('adminadmin'),
+            'password' => Hash::make('password'),
         ]);
 
         Barang::factory()->count(100)->create();

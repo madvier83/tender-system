@@ -9,7 +9,10 @@
 
       <div class="p-8">
           <h1 class="text-4xl font-semibold mb-4 text-white">Tender</h1>
-          <a href="/tender/create" class="btn btn-primary my-4">Ajukan Tender</a>
+          <a href="/tender/create" class="btn btn-primary my-4">Ajukan Tender <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          </a>
           <div class="bg-gray-900 p-4 h-max rounded-xl overflow-hidden overflow-x-auto">
               <table className="table table-zebra-zebra table-xs bg-white w-full border border-collapse border-white">
                   <thead>

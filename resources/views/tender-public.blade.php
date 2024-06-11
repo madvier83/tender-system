@@ -72,15 +72,16 @@
                             <tr>
                                 <td>Harga</td>
                                 <td>:</td>
-                                <td>Rp. {{ $tender->barang->harga }}</td>
+                                <td>Rp. {{ $tender->barang->harga }} / {{ $tender->barang->kuantitas }}</td>
                             </tr>
                             <tr>
                                 <td>Gambar</td>
                                 <td>:</td>
                                 <td>
-                                    <div class="bg-white rounded-lg w-32 h-32 my-2"
+                                    <div class="bg-white rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-clip"
                                         onClick="{document.getElementById('gambarBarang').showModal()}">
-                                        <img src="/img/barang.png" alt="barang">
+                                        <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
+                                            alt="Gambar">
                                     </div>
 
                                     <dialog id="gambarBarang" className="modal">
@@ -88,7 +89,8 @@
                                             <div class="p-8">
                                                 <h3 className="font-bold text-lg"></h3>
                                                 <div class="bg-white rounded-lg my-2">
-                                                    <img src="/img/barang.png" alt="barang">
+                                                    <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
+                                                        alt="Gambar">
                                                 </div>
                                                 <button class="btn btn-ghost w-full"
                                                     onClick="{document.getElementById('gambarBarang').close()}">Close
@@ -208,14 +210,14 @@
                                                     <div class="label">
                                                         <span class="label-text">Merek</span>
                                                     </div>
-                                                    <input name="kualitas" type="text" placeholder="Tulis disini"
+                                                    <input name="merek" type="text" placeholder="Tulis disini"
                                                         class="input input-bordered w-full"
-                                                        value="{{ old('kualitas') }}">
-                                                    @error('kualitas')
+                                                        value="{{ old('merek') }}">
+                                                    @error('merek')
                                                         <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                     @enderror
                                                 </label>
-                                                <label class="form-control mt-2 w-24">
+                                                {{-- <label class="form-control mt-2 w-24">
                                                     <div class="label">
                                                         <span class="label-text">Bobot</span>
                                                     </div>
@@ -231,7 +233,7 @@
                                                     @error('kualitas')
                                                         <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                     @enderror
-                                                </label>
+                                                </label> --}}
                                             </div>
                                             <div class="flex gap-2">
                                                 <label class="form-control w-full mt-2">
@@ -245,7 +247,7 @@
                                                         <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                     @enderror
                                                 </label>
-                                                <label class="form-control mt-2 w-24">
+                                                {{-- <label class="form-control mt-2 w-24">
                                                     <div class="label">
                                                         <span class="label-text">Bobot</span>
                                                     </div>
@@ -261,7 +263,7 @@
                                                     @error('kualitas')
                                                         <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                     @enderror
-                                                </label>
+                                                </label> --}}
                                             </div>
                                             <label class="form-control w-full mt-2">
                                                 <div class="label">
@@ -287,20 +289,7 @@
                                             </label>
                                             <label class="form-control w-full mt-2">
                                                 <div class="label">
-                                                    <span class="label-text">Kuantitas barang</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <input name="kuantitas" type="number" placeholder="Tulis disini"
-                                                        class="input input-bordered w-full"
-                                                        value="{{ old('kuantitas') }}">
-                                                </div>
-                                                @error('kuantitas')
-                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                                                @enderror
-                                            </label>
-                                            <label class="form-control w-full mt-2">
-                                                <div class="label">
-                                                    <span class="label-text">Kuantitas barang</span>
+                                                    <span class="label-text">Kuantitas</span>
                                                 </div>
                                                 <div class="flex">
                                                     <input name="kuantitas" type="number" placeholder="Tulis disini"

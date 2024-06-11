@@ -40,10 +40,10 @@ class PenawaranController extends Controller
             'nama' => 'required|string|max:255',
             'merek' => 'required|string|max:255',
             'kualitas' => 'required|string|max:255',
-            'satuan' => 'required|integer',
+            'satuan' => 'required',
             'harga' => 'required|numeric|min:0',
             'kuantitas' => 'required|integer|min:1',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tgl_masuk' => 'required|date',
             'tgl_pembaruan' => 'nullable|date',
         ]);
@@ -66,10 +66,10 @@ class PenawaranController extends Controller
             'nama' => 'required|string|max:255',
             'merek' => 'required|string|max:255',
             'kualitas' => 'required|string|max:255',
-            'satuan' => 'required|integer',
+            'satuan' => 'required',
             'harga' => 'required|numeric|min:0',
             'kuantitas' => 'required|integer|min:1',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
             'tgl_masuk' => 'required|date',
             'tgl_pembaruan' => 'nullable|date',
         ]);
@@ -95,6 +95,10 @@ class PenawaranController extends Controller
         $t = Tender::with(['penawaran' => function ($query) {
             $query->orderBy('harga', 'asc');
         }])->where('id', $id)->get()->first();
+
+        if (is_null($t)) {
+            abort(404, 'Tender not found');
+        }
 
         return view('penawaran-show', ['tender' => $t]);
     }

@@ -23,13 +23,13 @@ class UpdateBarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string|max:255',
-            'merek' => 'required|string|max:255',
-            'kualitas' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-            'gambar' => 'nullable|image|max:2048',
-            'tgl_masuk' => 'required|date',
-            'tgl_pembaruan' => "nullable",
+            // 'nama' => 'required|string|max:255',
+            // 'merek' => 'required|string|max:255',
+            // 'kualitas' => 'required|string|max:255',
+            // 'harga' => 'required|numeric',
+            // 'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'tgl_masuk' => 'required|date',
+            // 'tgl_pembaruan' => "nullable",
         ];
     }
 }

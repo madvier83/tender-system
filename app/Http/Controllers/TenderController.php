@@ -51,6 +51,10 @@ class TenderController extends Controller
             $query->orderBy('harga', 'asc');
         }])->where('id', $tender->id)->get()->first();
 
+        if (is_null($t)) {
+            abort(404, 'Tender not found');
+        }
+
         return view('tender-show', ['tender' => $t]);
     }
 
@@ -59,6 +63,10 @@ class TenderController extends Controller
         $t = Tender::with(['penawaran' => function ($query) {
             $query->orderBy('harga', 'asc');
         }])->where('id', $id)->get()->first();
+
+        if (is_null($t)) {
+            abort(404, 'Tender not found');
+        }
 
         return view('tender-public', ['tender' => $t]);
     }

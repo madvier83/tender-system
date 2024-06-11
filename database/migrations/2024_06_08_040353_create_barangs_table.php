@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kualitas');
             $table->string('gambar')->nullable();
             $table->bigInteger('harga');
+            $table->string('kuantitas');
             $table->date('tgl_masuk');
             $table->date('tgl_pembaruan')->nullable();
             $table->timestamps();

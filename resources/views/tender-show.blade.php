@@ -97,15 +97,16 @@
                             <tr>
                                 <td>Harga</td>
                                 <td>:</td>
-                                <td>Rp. {{ $tender->barang->harga }}</td>
+                                <td>Rp. {{ $tender->barang->harga }} / {{ $tender->barang->kuantitas }}</td>
                             </tr>
                             <tr>
                                 <td>Gambar</td>
                                 <td>:</td>
                                 <td>
-                                    <div class="bg-white rounded-lg w-32 h-32 my-2"
+                                    <div class="bg-white rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-clip"
                                         onClick="{document.getElementById('gambarBarang').showModal()}">
-                                        <img src="/img/barang.png" alt="barang">
+                                        <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
+                                            alt="Gambar">
                                     </div>
 
                                     <dialog id="gambarBarang" className="modal">
@@ -113,7 +114,8 @@
                                             <div class="p-8">
                                                 <h3 className="font-bold text-lg"></h3>
                                                 <div class="bg-white rounded-lg my-2">
-                                                    <img src="/img/barang.png" alt="barang">
+                                                    <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
+                                                        alt="Gambar">
                                                 </div>
                                                 <button class="btn btn-ghost w-full"
                                                     onClick="{document.getElementById('gambarBarang').close()}">Close
@@ -173,7 +175,7 @@
                                         <tr>
                                             <td class="px-0">Harga</td>
                                             <td>:</td>
-                                            <td>Rp. {{ $penawaran->harga }}</td>
+                                            <td>Rp. {{ $penawaran->harga }} / {{ $penawaran->satuan }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Gambar</td>
@@ -181,7 +183,8 @@
                                             <td>
                                                 <div class="bg-gray-700 rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-hidden"
                                                     onClick="{document.getElementById('gambarBarang{{ $penawaran->id }}').showModal()}">
-                                                    <img src="{{ asset('storage/gambar/' . $penawaran->gambar) }}" alt="Gambar">
+                                                    <img src="{{ $penawaran->gambar ? asset('storage/gambar/' . $penawaran->gambar) : asset('img/noimg.png') }}"
+                                                        alt="Gambar">
                                                 </div>
 
                                                 <dialog id="gambarBarang{{ $penawaran->id }}" className="modal">
@@ -189,7 +192,9 @@
                                                         <div class="p-8">
                                                             <h3 className="font-bold text-lg"></h3>
                                                             <div class="bg-white rounded-lg my-2">
-                                                                <img src="{{ asset('storage/gambar/' . $penawaran->gambar) }}" alt="Gambar">
+
+                                                                <img src="{{ $penawaran->gambar ? asset('storage/gambar/' . $penawaran->gambar) : asset('img/noimg.png') }}"
+                                                                    alt="Gambar">
                                                             </div>
                                                             <button class="btn btn-ghost w-full"
                                                                 onClick="{document.getElementById('gambarBarang{{ $penawaran->id }}').close()}">Close

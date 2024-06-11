@@ -26,9 +26,9 @@ return new class extends Migration
             $table->string('nama');
             $table->string('merek');
             $table->string('kualitas');
-            $table->integer('satuan');
+            $table->string('satuan');
             $table->bigInteger('harga');
-            $table->integer('kuantitas');
+            $table->string('kuantitas');
             $table->string('gambar')->nullable();
             $table->date('tgl_masuk');
             $table->date('tgl_pembaruan')->nullable();

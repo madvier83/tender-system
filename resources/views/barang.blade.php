@@ -9,7 +9,11 @@
 
         <div class="p-8">
             <h1 class="text-4xl font-semibold mb-4 text-white">Tabel Barang</h1>
-            <a href="/barang/create" class="btn btn-primary my-4">Kriteria Barang</a>
+            <a href="/barang/create" class="btn btn-primary my-4">Tambah Barang <svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </a>
             <div class="bg-gray-900 p-4 h-max rounded-xl overflow-hidden overflow-x-auto">
                 <table className="table table-zebra-zebra table-xs bg-white w-full border border-collapse border-white">
                     <thead>
@@ -19,7 +23,7 @@
                             <th>Merk</th>
                             <th>Kualitas</th>
                             <th>Gambar</th>
-                            <th>Harga</th>
+                            <th class="w-52">Harga</th>
                             <th>Tgl Barang Masuk</th>
                             <th>Tgl Pembaruan</th>
                             <th>Aksi</th>
@@ -36,7 +40,8 @@
 
                                     <div class="bg-white rounded-lg w-16 h-16 my-2 flex items-center justify-center overflow-clip"
                                         onClick={document.getElementById('gambarBarang{{ $barang->id }}').showModal()}>
-                                        <img src="{{ asset('storage/gambar/' . $barang->gambar) }}" alt="Gambar">
+                                        <img src="{{ $barang->gambar ? asset('storage/gambar/' . $barang->gambar) : asset('img/noimg.png') }}"
+                                            alt="Gambar">
                                     </div>
 
                                     <dialog id="gambarBarang{{ $barang->id }}" className="modal">
@@ -44,7 +49,7 @@
                                             <div class="p-8">
                                                 <h3 className="font-bold text-lg">{{ $barang->nama }}</h3>
                                                 <div class="bg-white rounded-lg my-2">
-                                                    <img src="{{ asset('storage/gambar/' . $barang->gambar) }}"
+                                                    <img src="{{ $barang->gambar ? asset('storage/gambar/' . $barang->gambar) : asset('img/noimg.png') }}"
                                                         alt="Gambar">
                                                 </div>
                                                 <button class="btn btn-ghost w-full"
@@ -55,8 +60,7 @@
                                     </dialog>
 
                                 </td>
-                                {{-- <td>{{ $barang->gambar }}</td> --}}
-                                <td>{{ $barang->harga }}</td>
+                                <td>Rp. {{ $barang->harga }} / {{ $barang->kuantitas }}</td>
                                 <td>{{ date('d M Y', strtotime($barang->tgl_masuk)) }}</td>
                                 <td>{{ date('d M Y', strtotime($barang->tgl_pembaruan)) }}</td>
                                 <td>
