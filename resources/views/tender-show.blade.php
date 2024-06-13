@@ -78,54 +78,7 @@
                         </script>
 
                         <h1 class="text-2xl font-semibold mb-4 text-white mt-8">Kriteria Barang</h1>
-                        <table>
-                            <tr>
-                                <td>Nama</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->nama }}</td>
-                            </tr>
-                            <tr>
-                                <td>Merek</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->merek }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kualitas</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->kualitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Harga</td>
-                                <td>:</td>
-                                <td>Rp. {{ $tender->barang->harga }} / {{ $tender->barang->kuantitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gambar</td>
-                                <td>:</td>
-                                <td>
-                                    <div class="bg-white rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-clip"
-                                        onClick="{document.getElementById('gambarBarang').showModal()}">
-                                        <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                            alt="Gambar">
-                                    </div>
-
-                                    <dialog id="gambarBarang" className="modal">
-                                        <div className="modal-box bg-gray-900">
-                                            <div class="p-8">
-                                                <h3 className="font-bold text-lg"></h3>
-                                                <div class="bg-white rounded-lg my-2">
-                                                    <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                                        alt="Gambar">
-                                                </div>
-                                                <button class="btn btn-ghost w-full"
-                                                    onClick="{document.getElementById('gambarBarang').close()}">Close
-                                                    X</button>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                </td>
-                            </tr>
-                        </table>
+                        <x-barang-detail :barang="$tender->barang" />
                     </div>
 
                     <div class=" w-[30vw]">
@@ -155,23 +108,23 @@
                                         <tr>
                                             <td class="px-0">Merek</td>
                                             <td>:</td>
-                                            <td>{{ $penawaran->merek }}</td>
+                                            <td>{{ json_decode($penawaran->merek)->nama }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Kualitas</td>
                                             <td>:</td>
-                                            <td>{{ $penawaran->kualitas }}</td>
+                                            <td>{{ json_decode($penawaran->kualitas_select)->nama }} - {{ $penawaran->kualitas }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Kuantitas</td>
                                             <td>:</td>
                                             <td>{{ $penawaran->kuantitas }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="px-0">Satuan</td>
                                             <td>:</td>
                                             <td>{{ $penawaran->satuan }}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td class="px-0">Harga</td>
                                             <td>:</td>

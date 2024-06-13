@@ -53,54 +53,7 @@
                         </div>
 
                         <h1 class="text-2xl font-semibold mb-4 text-white mt-8">Kriteria Barang</h1>
-                        <table>
-                            <tr>
-                                <td>Nama</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->nama }}</td>
-                            </tr>
-                            <tr>
-                                <td>Merek</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->merek }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kualitas</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->kualitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Harga</td>
-                                <td>:</td>
-                                <td>Rp. {{ $tender->barang->harga }} / {{ $tender->barang->kuantitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gambar</td>
-                                <td>:</td>
-                                <td>
-                                    <div class="bg-white rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-clip"
-                                        onClick="{document.getElementById('gambarBarang').showModal()}">
-                                        <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                            alt="Gambar">
-                                    </div>
-
-                                    <dialog id="gambarBarang" className="modal">
-                                        <div className="modal-box bg-gray-900">
-                                            <div class="p-8">
-                                                <h3 className="font-bold text-lg"></h3>
-                                                <div class="bg-white rounded-lg my-2">
-                                                    <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                                        alt="Gambar">
-                                                </div>
-                                                <button class="btn btn-ghost w-full"
-                                                    onClick="{document.getElementById('gambarBarang').close()}">Close
-                                                    X</button>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                </td>
-                            </tr>
-                        </table>
+                        <x-barang-detail :barang="$tender->barang" />
                     </div>
 
                     <div class="">
@@ -205,40 +158,56 @@
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
                                             </label> --}}
+
+                                            {{-- <p>{{ $tender->barang->merek }}</p> --}}
+
+
+                                            @php
+                                                $options = json_decode($tender->barang->merek, true);
+                                            @endphp
+                                            <label class="form-control w-full mt-2">
+                                                <div class="label">
+                                                    <span class="label-text">Merek</span>
+                                                </div>
+                                                <select name="merek" class="input input-bordered w-full">
+                                                    <option value="" disabled selected>Pilih Merek</option>
+                                                    @foreach ($options as $option)
+                                                        <option value="{{ json_encode($option) }}"
+                                                            {{ old('merek') == $option['nama'] ? 'selected' : '' }}>
+                                                            {{ $option['nama'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('merek')
+                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </label>
+
+                                            @php
+                                                $options = json_decode($tender->barang->kualitas_select, true);
+                                            @endphp
+                                            <label class="form-control w-full mt-2">
+                                                <div class="label">
+                                                    <span class="label-text">Kualitas</span>
+                                                </div>
+                                                <select name="kualitas_select" class="input input-bordered w-full">
+                                                    <option value="" disabled selected>Pilih Kualitas</option>
+                                                    @foreach ($options as $option)
+                                                        <option value="{{ json_encode($option) }}""
+                                                            {{ old('kualitas_select') == $option['nama'] ? 'selected' : '' }}>
+                                                            {{ $option['nama'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('kualitas_select')
+                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </label>
+
                                             <div class="flex gap-2">
                                                 <label class="form-control w-full mt-2">
                                                     <div class="label">
-                                                        <span class="label-text">Merek</span>
-                                                    </div>
-                                                    <input name="merek" type="text" placeholder="Tulis disini"
-                                                        class="input input-bordered w-full"
-                                                        value="{{ old('merek') }}">
-                                                    @error('merek')
-                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                                                    @enderror
-                                                </label>
-                                                {{-- <label class="form-control mt-2 w-24">
-                                                    <div class="label">
-                                                        <span class="label-text">Bobot</span>
-                                                    </div>
-                                                    <select name="bobot_kuantitas" type="number"
-                                                        placeholder="Tulis disini" class="input input-bordered w-full"
-                                                        value="{{ old('kuantitas') }}">
-                                                        @for ($i = 1; $i <= 10; $i++)
-                                                            <option value="{{ $i }}"
-                                                                {{ old('kuantitas') == $i ? 'selected' : '' }}>
-                                                                {{ $i }}</option>
-                                                        @endfor
-                                                    </select>
-                                                    @error('kualitas')
-                                                        <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                                                    @enderror
-                                                </label> --}}
-                                            </div>
-                                            <div class="flex gap-2">
-                                                <label class="form-control w-full mt-2">
-                                                    <div class="label">
-                                                        <span class="label-text">Kualitas barang</span>
+                                                        <span class="label-text">Deskripsi Kualitas</span>
                                                     </div>
                                                     <input name="kualitas" type="text" placeholder="Tulis disini"
                                                         class="input input-bordered w-full"
@@ -270,8 +239,8 @@
                                                     <span class="label-text">Satuan</span>
                                                 </div>
                                                 <input name="satuan" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('satuan') }}" />
+                                                    class="input input-bordered w-full" readonly
+                                                    value="{{ $tender->barang->kuantitas }}" />
                                                 @error('satuan')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror

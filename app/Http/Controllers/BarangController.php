@@ -33,8 +33,9 @@ class BarangController extends Controller
         $validated = $request->validate(
             [
                 'nama' => 'required|string|max:255',
-                'merek' => 'required|string|max:255',
+                'merek' => 'required|string|max:255|min:5',
                 'kualitas' => 'required|string|max:255',
+                'kualitas_select' => 'required|string|min:5',
                 'harga' => 'required|numeric|min:0',
                 'kuantitas' => 'required|string|max:255',
                 'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
@@ -79,8 +80,9 @@ class BarangController extends Controller
         // Validate the request data including the image
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'merek' => 'required|string|max:255',
+            'merek' => 'required|string|max:255|min:5',
             'kualitas' => 'required|string|max:255',
+            'kualitas_select' => 'required|string|min:5',
             'harga' => 'required|numeric|min:0',
             'kuantitas' => 'required|string|max:255',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',

@@ -22,7 +22,7 @@
                             @foreach ($barangs as $barang)
                                 <option value="{{ $barang->id }}"
                                     {{ old('barang_id') == $barang->id ? 'selected' : '' }}>
-                                    {{ $barang->nama }} - {{ $barang->merek }} - Rp. {{ $barang->harga }}
+                                    {{ $barang->nama }}
                                 </option>
                             @endforeach
                         </select>

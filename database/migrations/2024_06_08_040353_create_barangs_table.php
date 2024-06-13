@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
+            $table->integer('bobot')->default(0);
             $table->string('nama');
             $table->string('merek');
             $table->string('kualitas');
+            $table->longText('kualitas_select')->nullable();
             $table->string('gambar')->nullable();
             $table->bigInteger('harga');
             $table->string('kuantitas');

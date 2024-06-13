@@ -23,9 +23,11 @@ return new class extends Migration
             $table->string('tgl_pengajuan');
             $table->string('tgl_selesai');
 
+            $table->string('ranking')->default("0");
             $table->string('nama');
             $table->string('merek');
             $table->string('kualitas');
+            $table->string('kualitas_select');
             $table->string('satuan');
             $table->bigInteger('harga');
             $table->string('kuantitas');

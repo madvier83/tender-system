@@ -78,58 +78,25 @@
                         </script>
 
                         <h1 class="text-2xl font-semibold mb-4 text-white mt-8">Kriteria Barang</h1>
-                        <table>
-                            <tr>
-                                <td>Nama</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->nama }}</td>
-                            </tr>
-                            <tr>
-                                <td>Merek</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->merek }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kualitas</td>
-                                <td>:</td>
-                                <td>{{ $tender->barang->kualitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Harga</td>
-                                <td>:</td>
-                                <td>Rp. {{ $tender->barang->harga }} / {{ $tender->barang->kuantitas }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gambar</td>
-                                <td>:</td>
-                                <td>
-                                    <div class="bg-white rounded-lg w-32 h-32 my-2 flex items-center justify-center overflow-clip"
-                                        onClick="{document.getElementById('gambarBarang').showModal()}">
-                                        <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                            alt="Gambar">
-                                    </div>
-
-                                    <dialog id="gambarBarang" className="modal">
-                                        <div className="modal-box bg-gray-900">
-                                            <div class="p-8">
-                                                <h3 className="font-bold text-lg"></h3>
-                                                <div class="bg-white rounded-lg my-2">
-                                                    <img src="{{ $tender->barang->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
-                                                        alt="Gambar">
-                                                </div>
-                                                <button class="btn btn-ghost w-full"
-                                                    onClick="{document.getElementById('gambarBarang').close()}">Close
-                                                    X</button>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                </td>
-                            </tr>
-                        </table>
+                        <x-barang-detail :barang="$tender->barang" />
                     </div>
 
+
+                    @php
+                        $now = now();
+                        $tglBuka = \Carbon\Carbon::parse($tender->tgl_buka);
+                        $tglTutup = \Carbon\Carbon::parse($tender->tgl_tutup);
+
+                        if ($now < $tglBuka) {
+                            $status = 'Pemenang Tender Sementara';
+                        } elseif ($now >= $tglBuka && $now <= $tglTutup) {
+                            $status = 'Pemenang Tender Sementara';
+                        } else {
+                            $status = 'Pemenang Tender';
+                        }
+                    @endphp
                     <div class=" w-[30vw]">
-                        <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Pemenang Tender</h1>
+                        <h1 class="text-4xl font-semibold mb-4 text-white mt-8">{{ $status}}</h1>
                         <div class="h-[75vh] flex flex-col gap-4 overflow-y-scroll rounded-xl pr-8">
                             @if (count($tender->penawaran) == 0)
                                 <div class="bg-gray-900 p-6 rounded-xl">
@@ -165,27 +132,29 @@
                                         <tr>
                                             <td class="px-0">Merek</td>
                                             <td>:</td>
-                                            <td>{{ $tender->penawaran[0]->merek }}</td>
+                                            <td>{{ json_decode($tender->penawaran[0]->merek)->nama }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Kualitas</td>
                                             <td>:</td>
-                                            <td>{{ $tender->penawaran[0]->kualitas }}</td>
+                                            <td>{{ json_decode($tender->penawaran[0]->kualitas_select)->nama }} -
+                                                {{ $tender->penawaran[0]->kualitas }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Kuantitas</td>
                                             <td>:</td>
                                             <td>{{ $tender->penawaran[0]->kuantitas }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="px-0">Satuan</td>
                                             <td>:</td>
                                             <td>{{ $tender->penawaran[0]->satuan }}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td class="px-0">Harga</td>
                                             <td>:</td>
-                                            <td>Rp. {{ $tender->penawaran[0]->harga }} / {{ $tender->penawaran[0]->satuan }}</td>
+                                            <td>Rp. {{ $tender->penawaran[0]->harga }} /
+                                                {{ $tender->penawaran[0]->satuan }}</td>
                                         </tr>
                                         <tr>
                                             <td class="px-0">Gambar</td>
@@ -194,7 +163,7 @@
                                                 <div class="bg-white rounded-lg w-32 h-32 my-2"
                                                     onClick="{document.getElementById('gambarBarang').showModal()}">
 
-                                                    <img src="{{ $tender->penawaran[0]?->gambar ? asset('storage/gambar/' . $barang->gambar) : asset('img/noimg.png') }}"
+                                                    <img src="{{ $tender->penawaran[0]?->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
                                                         alt="Gambar">
                                                 </div>
 
@@ -204,7 +173,7 @@
                                                             <h3 className="font-bold text-lg"></h3>
                                                             <div class="bg-white rounded-lg my-2">
 
-                                                                <img src="{{ $tender->penawaran[0]?->gambar ? asset('storage/gambar/' . $barang->gambar) : asset('img/noimg.png') }}"
+                                                                <img src="{{ $tender->penawaran[0]?->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
                                                                     alt="Gambar">
                                                             </div>
                                                             <button class="btn btn-ghost w-full"
@@ -247,27 +216,29 @@
                                                 <tr>
                                                     <td class="px-0">Merek</td>
                                                     <td>:</td>
-                                                    <td>{{ $penawaran->merek }}</td>
+                                                    <td>{{ json_decode($penawaran->merek)->nama }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="px-0">Kualitas</td>
                                                     <td>:</td>
-                                                    <td>{{ $penawaran->kualitas }}</td>
+                                                    <td>{{ json_decode($penawaran->kualitas_select)->nama }}
+                                                        - {{ $penawaran->kualitas }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="px-0">Kuantitas</td>
                                                     <td>:</td>
                                                     <td>{{ $penawaran->kuantitas }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="px-0">Satuan</td>
-                                                    <td>:</td>
-                                                    <td>{{ $penawaran->satuan }}</td>
-                                                </tr>
+                                                {{-- <tr>
+                                                <td class="px-0">Satuan</td>
+                                                <td>:</td>
+                                                <td>{{ $penawaran->satuan }}</td>
+                                            </tr> --}}
                                                 <tr>
                                                     <td class="px-0">Harga</td>
                                                     <td>:</td>
-                                                    <td>Rp. {{ $penawaran->harga }} / {{ $penawaran->satuan }}</td>
+                                                    <td>Rp. {{ $penawaran->harga }} /
+                                                        {{ $penawaran->satuan }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="px-0">Gambar</td>
@@ -276,7 +247,7 @@
                                                         <div class="bg-white rounded-lg w-32 h-32 my-2"
                                                             onClick="{document.getElementById('gambarBarang').showModal()}">
 
-                                                            <img src="{{ $penawaran?->gambar ? asset('storage/gambar/' . $penawaran->gambar) : asset('img/noimg.png') }}"
+                                                            <img src="{{ $penawaran?->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
                                                                 alt="Gambar">
                                                         </div>
 
@@ -286,7 +257,7 @@
                                                                     <h3 className="font-bold text-lg"></h3>
                                                                     <div class="bg-white rounded-lg my-2">
 
-                                                                        <img src="{{ $penawaran?->gambar ? asset('storage/gambar/' . $penawaran->gambar) : asset('img/noimg.png') }}"
+                                                                        <img src="{{ $penawaran?->gambar ? asset('storage/gambar/' . $tender->barang->gambar) : asset('img/noimg.png') }}"
                                                                             alt="Gambar">
                                                                     </div>
                                                                     <button class="btn btn-ghost w-full"

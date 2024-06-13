@@ -62,6 +62,15 @@
 
                     </tbody>
                 </table>
+                
+                <div class="flex items-center justify-center h-96 w-full text-xl text-white">
+                    <p>
+                        @if (count($tenders) <= 0)
+                            Belum ada tender yang diajukan
+                        @endif
+                    </p>
+                </div>
+                
             </div>
         </div>
 

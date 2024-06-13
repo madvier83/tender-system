@@ -34,8 +34,26 @@
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
                                 <td>{{ $barang->nama }}</td>
-                                <td>{{ $barang->merek }}</td>
-                                <td>{{ $barang->kualitas }}</td>
+                                @php
+                                    $mereks = json_decode($barang->merek);
+                                @endphp
+                                <td class="min-w-32">
+                                    @if (isset($mereks) && is_array($mereks) && count($mereks) > 0)
+                                        @foreach ($mereks as $merek)
+                                            <p>- {{ $merek->nama }}</p>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                @php
+                                    $kualitass = json_decode($barang->kualitas_select);
+                                @endphp
+                                <td class="min-w-32">
+                                    @if (isset($kualitass) && is_array($kualitass) && count($kualitass) > 0)
+                                        @foreach ($kualitass as $kualitas_select)
+                                            <p>- {{ $kualitas_select->nama }}</p>
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td>
 
                                     <div class="bg-white rounded-lg w-16 h-16 my-2 flex items-center justify-center overflow-clip"
@@ -102,6 +120,13 @@
 
                     </tbody>
                 </table>
+                <div class="flex items-center justify-center h-96 w-full text-xl text-white">
+                    <p>
+                        @if (count($barangs) <= 0)
+                            Belum ada data barang yang dibuat
+                        @endif
+                    </p>
+                </div>
             </div>
         </div>
 

@@ -48,7 +48,7 @@ class TenderController extends Controller
     public function show(Tender $tender)
     {
         $t = Tender::with(['penawaran' => function ($query) {
-            $query->orderBy('harga', 'asc');
+            $query->orderBy('ranking', 'desc');
         }])->where('id', $tender->id)->get()->first();
 
         if (is_null($t)) {
@@ -61,7 +61,7 @@ class TenderController extends Controller
     public function publicShow($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {
-            $query->orderBy('harga', 'asc');
+            $query->orderBy('ranking', 'desc');
         }])->where('id', $id)->get()->first();
 
         if (is_null($t)) {
@@ -73,7 +73,7 @@ class TenderController extends Controller
     public function publicSuccess($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {
-            $query->orderBy('harga', 'asc');
+            $query->orderBy('ranking', 'desc');
         }])->where('id', $id)->get()->first();
 
         return view('tender-public-success', ['tender' => $t]);

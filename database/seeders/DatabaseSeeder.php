@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        Barang::factory()->count(100)->create();
+        // Barang::factory()->count(100)->create();
     }
 }

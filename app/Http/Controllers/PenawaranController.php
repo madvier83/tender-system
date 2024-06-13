@@ -63,9 +63,12 @@ class PenawaranController extends Controller
             'alamat' => 'required|string|max:255',
             'tgl_pengajuan' => 'required|date',
             'tgl_selesai' => 'required|date',
+
+            // 'ranking' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
             'merek' => 'required|string|max:255',
             'kualitas' => 'required|string|max:255',
+            'kualitas_select' => 'required|string|max:255',
             'satuan' => 'required',
             'harga' => 'required|numeric|min:0',
             'kuantitas' => 'required|integer|min:1',
@@ -84,7 +87,46 @@ class PenawaranController extends Controller
 
         Penawaran::create($validated);
 
+        // Recalculate ranks for all Penawaran records for the given tender_id
+        $this->recalculateRanks($request->tender_id);
+
         return redirect("tender-public/" . $request->tender_id . "/success");
+    }
+
+    private function recalculateRanks($tenderId)
+    {
+        $penawaranRecords = Penawaran::where('tender_id', $tenderId)->get();
+
+        if ($penawaranRecords->isEmpty()) {
+            return;
+        }
+
+        $prices = $penawaranRecords->pluck('harga');
+        $min_price = $prices->min();
+        $max_price = $prices->max();
+
+        foreach ($penawaranRecords as $penawaran) {
+            // Normalize the price
+            if ($max_price != $min_price) {
+                $normalized_price = 10 - 9 * (($penawaran->harga - $min_price) / ($max_price - $min_price));
+                // $normalized_price = 1 + 9 * (($penawaran->harga - $min_price) / ($max_price - $min_price));
+            } else {
+                $normalized_price = 5.5; // Midpoint of 1-10
+            }
+
+            // Decode JSON fields and calculate rank
+            $kualitas_bobot = json_decode($penawaran->kualitas_select)->bobot;
+            $merek_bobot = json_decode($penawaran->merek)->bobot;
+            $rank = ($normalized_price * 0.3) + ($kualitas_bobot * 0.4) + ($merek_bobot * 0.2);
+
+            if ($penawaran->tgl_pembaruan) {
+                $rank += 0.1;
+            }
+
+            // Update the rank
+            $penawaran->ranking = $rank;
+            $penawaran->save();
+        }
     }
 
     /**
@@ -93,7 +135,7 @@ class PenawaranController extends Controller
     public function show($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {
-            $query->orderBy('harga', 'asc');
+            $query->orderBy('ranking', 'desc');
         }])->where('id', $id)->get()->first();
 
         if (is_null($t)) {
