@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Tender;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TenderController extends Controller
@@ -58,6 +59,13 @@ class TenderController extends Controller
         return view('tender-show', ['tender' => $t]);
     }
 
+    public function public()
+    {
+
+        $t = Tender::where('tgl_tutup', '>', Carbon::now())->get();
+
+        return view('tender-public-list', ['tenders' => $t]);
+    }
     public function publicShow($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {

@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
 
+Route::get('tender-public', [TenderController::class, 'public']);
 Route::get('tender-public/{id}', [TenderController::class, 'publicShow']);
 Route::post('tender-public/{id}', [PenawaranController::class, 'publicStore']);
 Route::get('tender-public/{id}/success', [TenderController::class, 'publicSuccess']);
