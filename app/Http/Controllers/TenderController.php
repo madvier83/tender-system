@@ -12,6 +12,10 @@ class TenderController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function welcome()
+    {
+        return view('tender-public-dashboard');
+    }
     public function index()
     {
         return view('tender', ['tenders' => Tender::with('barang')->orderBy("created_at", "DESC")->get()]);

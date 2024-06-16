@@ -24,8 +24,8 @@
                     <!-- Sidebar content here -->
                     <div>
                         <a href="/dashboard"
-                            class="{{ request()->is('dashboard*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-8 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
-                            <div class="w-12">
+                            class="{{ request()->is('dashboard*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
                                 <img src="/img/home.svg" alt="">
                             </div>
                             <h2 class="text-xl">Home</h2>
@@ -33,8 +33,8 @@
                     </div>
                     <div>
                         <a href="/barang"
-                            class="{{ request()->is('barang*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-8 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
-                            <div class="w-12">
+                            class="{{ request()->is('barang*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
                                 <img src="/img/box.svg" alt="">
                             </div>
                             <h2 class="text-xl">Barang</h2>
@@ -42,8 +42,8 @@
                     </div>
                     <div>
                         <a href="/tender"
-                            class="{{ request()->is('tender*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-8 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
-                            <div class="w-12">
+                            class="{{ request()->is('tender*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
                                 <img src="/img/tender.svg" alt="">
                             </div>
                             <h2 class="text-xl">Tender</h2>
@@ -51,11 +51,20 @@
                     </div>
                     <div>
                         <a href="/penawaran"
-                            class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-8 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
-                            <div class="w-12">
+                            class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
                                 <img src="/img/deal.svg" alt="">
                             </div>
                             <h2 class="text-xl">Pengumuman</h2>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/stok"
+                            class="{{ request()->is('stok*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
+                                <img src="/img/stok.svg" alt="">
+                            </div>
+                            <h2 class="text-xl">Laporan</h2>
                         </a>
                     </div>
                     <div class="mt-auto">
@@ -67,7 +76,7 @@
                             </h1>
                             <button
                                 class="bg-gray-900 cursor-pointer px-8 py-4 text-white flex items-center hover:bg-rose-900 h-full w-full rounded-xl">
-                                <div class="w-12">
+                                <div class="w-8">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
