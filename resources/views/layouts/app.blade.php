@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@
 
 <body class="font-sans antialiased">
     <div class="bg-black h-screen relative">
-        <img src="{{ asset('img/bg.png') }}"
+        <img src="img/bg.png" 
             class="fixed top-0 left-0 w-full h-full object-cover blur-sm brightness-[.3]" alt="Background">
 
         {{-- @include('layouts.navigation') --}}
