@@ -12,9 +12,9 @@
             <div class="bg-gray-900 p-4 h-max rounded-xl overflow-hidden overflow-x-auto mt-8">
 
                 <div role="tablist" class="tabs tabs-boxed max-w-xl mb-4 bg-gray-800">
-                    <a href="/penawaran" role="tab" class="tab tab-active">Total Tender ({{ $totalTendersCount }})</a>
+                    <a href="/penawaran" role="tab" class="tab">Total Tender ({{ $totalTendersCount }})</a>
                     <a href="/penawaran/active" role="tab" class="tab">Tender Aktif ({{ $activeTendersCount }})</a>
-                    <a href="/penawaran/selesai" role="tab" class="tab">Tender Selesai ({{ $completeTendersCount }})</a>
+                    <a href="/penawaran/selesai" role="tab" class="tab tab-active">Tender Selesai ({{ $completeTendersCount }})</a>
                 </div>
 
                 <table className="table table-zebra-zebra table-xs bg-white w-full border border-collapse border-white">

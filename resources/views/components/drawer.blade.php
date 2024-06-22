@@ -88,6 +88,42 @@
                         </form>
                     </div>
                 </div>
+            @else
+                <div class="p-4 w-80 bg-gray-800 text-base-content rounded-xl h-full flex flex-col gap-4">
+                    <!-- Sidebar content here -->
+                    <div>
+                        <a href="/tender-public"
+                            class="{{ request()->is('tender-public') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
+                                <img src="/img/home.svg" alt="">
+                            </div>
+                            <h2 class="text-xl">Home</h2>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/tender-public/list"
+                            class="{{ request()->is('tender-public/list*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            <div class="w-8">
+                                <img src="/img/tender.svg" alt="">
+                            </div>
+                            <h2 class="text-xl">Tender</h2>
+                        </a>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="/">
+                            <button
+                                class="bg-gray-900 cursor-pointer px-8 py-4 text-white flex items-center hover:bg-rose-900 h-full w-full rounded-xl">
+                                <div class="w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                    </svg>
+                                </div>
+                                <h2 class="text-">Kembali</h2>
+                            </button>
+                        </a>
+                    </div>
+                </div>
             @endauth
 
         </div>

@@ -31,6 +31,7 @@
                 <img src="img/logo.png" alt="logo">
             </div>
             <a href="/login" class="btn-lg text-2xl bg-white text-black font-bold px-16 py-4 rounded-full">Login</a>
+            <a href="/tender-public" class="underline">Masuk sebagai vendor</a>
         </div>
     </div>
 </body>

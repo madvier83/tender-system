@@ -56,8 +56,22 @@
                         <x-barang-detail :barang="$tender->barang" />
                     </div>
 
-                    <div class=" w-[30vw]">
-                        <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Pengajuan Barang Terkirim!</h1>
+                    <div class="w-[30vw]">
+                        <h1 class="text-4xl font-semibold mb-16 text-white mt-8">Pengajuan Barang Terkirim!</h1>
+                        <div>
+                            <a href="/tender-public/list">
+                                <button
+                                    class="bg-gray-900 cursor-pointer px-8 py-4 text-white flex items-center hover:bg-rose-900 h-full w-full rounded-xl">
+                                    <div class="w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                        </svg>
+                                    </div>
+                                    <h2 class="text-">Kembali</h2>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

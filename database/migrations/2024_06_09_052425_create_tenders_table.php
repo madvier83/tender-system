@@ -16,8 +16,13 @@ return new class extends Migration
             $table->string("judul");
             $table->string("deskripsi");
             $table->foreignId("barang_id")->constrained();
+            // $table->foreign('barang_id')
+            //     ->references('id')
+            //     ->on('barangs')
+            //     ->onDelete('set null');
             $table->dateTime("tgl_buka");
             $table->dateTime("tgl_tutup");
+            $table->boolean("is_complete")->default(false);
             $table->timestamps();
         });
     }

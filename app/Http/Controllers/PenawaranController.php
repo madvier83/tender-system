@@ -10,11 +10,57 @@ class PenawaranController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
-    public function index()
+     */ public function index()
     {
-        return view('penawaran', ['tenders' => Tender::with('barang')->orderBy("created_at", "DESC")->get()]);
+        $tenders = Tender::with('barang')->orderBy("created_at", "DESC")->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
+
+        return view('penawaran', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
     }
+
+    public function indexAktif()
+    {
+        $tenders = Tender::with('barang')
+            ->where('tgl_tutup', '>', now())
+            ->orderBy("created_at", "DESC")
+            ->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
+
+        return view('penawaran-aktif', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
+    }
+
+    public function indexSelesai()
+    {
+        $tenders = Tender::with('barang')
+            ->where('tgl_tutup', '<', now())
+            ->orderBy("created_at", "DESC")
+            ->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
+
+        return view('penawaran-selesai', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,6 +91,7 @@ class PenawaranController extends Controller
             'kuantitas' => 'required|integer|min:1',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tgl_masuk' => 'required|date',
+            'tgl_exp' => 'required|date',
             'tgl_pembaruan' => 'nullable|date',
         ]);
 
@@ -65,6 +112,7 @@ class PenawaranController extends Controller
             'tgl_selesai' => 'required|date',
 
             // 'ranking' => 'required|string|max:255',
+
             'nama' => 'required|string|max:255',
             'merek' => 'required|string|max:255',
             'kualitas' => 'required|string|max:255',
@@ -74,6 +122,7 @@ class PenawaranController extends Controller
             'kuantitas' => 'required|integer|min:1',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
             'tgl_masuk' => 'required|date',
+            'tgl_exp' => 'required|date',
             'tgl_pembaruan' => 'nullable|date',
         ]);
 

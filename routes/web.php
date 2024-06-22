@@ -28,8 +28,13 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('barang', BarangController::class);
     Route::resource('tender', TenderController::class);
+
     Route::resource('penawaran', PenawaranController::class)->except("show");
+    Route::get('penawaran/active', [PenawaranController::class, 'indexAktif']);
+    Route::get('penawaran/selesai', [PenawaranController::class, 'indexSelesai']);
+
     Route::resource('stok', StokController::class);
+    // Route::get('scheduler', [TenderController::class, 'scheduler']);
 });
 
 Route::get('penawaran/{id}', [PenawaranController::class, 'show']);

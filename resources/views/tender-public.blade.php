@@ -7,11 +7,10 @@
 
     <x-drawer>
 
-        <div class="p-8 flex justify-center">
+        <div class="px-16 py-8 flex">
             <div class="">
-
-                <div class="flex flex-col md:flex-row gap-32">
-                    <div class=" w-[30vw]">
+                <div class="flex flex-col md:flex-row gap-16">
+                    <div class="min-w-[30vw]">
                         <h1 class="text-4xl font-semibold mb-4 text-white mt-8">Tender {{ $tender->judul }}</h1>
                         <p class="max-w-xl">{{ $tender->deskripsi }}</p>
 
@@ -114,18 +113,21 @@
                                                 </div>
                                                 <input name="tgl_pengajuan" type="date" placeholder="Tulis disini"
                                                     class="input input-bordered w-full"
-                                                    value="{{ old('tgl_pengajuan') }}" />
+                                                    value="{{ old('tgl_pengajuan', date('Y-m-d')) }}" />
                                                 @error('tgl_pengajuan')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
                                             </label>
+                                            @php
+                                                $date = \Carbon\Carbon::parse($tender->tgl_tutup)->format('Y-m-d');
+                                            @endphp
                                             <label class="form-control w-full mt-2">
                                                 <div class="label">
                                                     <span class="label-text">Tanggal selesai</span>
                                                 </div>
                                                 <input name="tgl_selesai" type="date" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('tgl_selesai') }}" />
+                                                    class="input input-bordered w-full cursor-not-allowed" readonly
+                                                    value="{{ $date }}" />
                                                 @error('tgl_selesai')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
@@ -141,26 +143,12 @@
                                                     <span class="label-text">Nama barang</span>
                                                 </div>
                                                 <input name="nama" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('nama') }}" />
+                                                    class="input input-bordered w-full cursor-not-allowed"
+                                                    value="{{ $tender->barang->nama }}" readonly />
                                                 @error('nama')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
                                             </label>
-                                            {{-- <label class="form-control w-full mt-2">
-                                                <div class="label">
-                                                    <span class="label-text">Merek</span>
-                                                </div>
-                                                <input name="merek" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full"
-                                                    value="{{ old('merek') }}" />
-                                                @error('merek')
-                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
-                                                @enderror
-                                            </label> --}}
-
-                                            {{-- <p>{{ $tender->barang->merek }}</p> --}}
-
 
                                             @php
                                                 $options = json_decode($tender->barang->merek, true);
@@ -173,7 +161,7 @@
                                                     <option value="" disabled selected>Pilih Merek</option>
                                                     @foreach ($options as $option)
                                                         <option value="{{ json_encode($option) }}"
-                                                            {{ old('merek') == $option['nama'] ? 'selected' : '' }}>
+                                                            {{ old('merek') == json_encode($option) ? 'selected' : '' }}>
                                                             {{ $option['nama'] }}
                                                         </option>
                                                     @endforeach
@@ -194,7 +182,7 @@
                                                     <option value="" disabled selected>Pilih Kualitas</option>
                                                     @foreach ($options as $option)
                                                         <option value="{{ json_encode($option) }}""
-                                                            {{ old('kualitas_select') == $option['nama'] ? 'selected' : '' }}>
+                                                            {{ old('kualitas_select') == json_encode($option) ? 'selected' : '' }}>
                                                             {{ $option['nama'] }}
                                                         </option>
                                                     @endforeach
@@ -239,7 +227,7 @@
                                                     <span class="label-text">Satuan</span>
                                                 </div>
                                                 <input name="satuan" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full" readonly
+                                                    class="input input-bordered w-full cursor-not-allowed" readonly
                                                     value="{{ $tender->barang->kuantitas }}" />
                                                 @error('satuan')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
@@ -289,6 +277,17 @@
                                                     class="input input-bordered w-full"
                                                     value="{{ old('tgl_masuk') }}" />
                                                 @error('tgl_masuk')
+                                                    <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </label>
+                                            <label class="form-control w-full mt-2">
+                                                <div class="label">
+                                                    <span class="label-text">Tanggal expired</span>
+                                                </div>
+                                                <input name="tgl_exp" type="date" placeholder="Tulis disini"
+                                                    class="input input-bordered w-full"
+                                                    value="{{ old('tgl_exp') }}" />
+                                                @error('tgl_exp')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
                                             </label>

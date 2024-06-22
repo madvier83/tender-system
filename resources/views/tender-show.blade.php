@@ -125,6 +125,11 @@
                                             <td>:</td>
                                             <td>{{ $penawaran->satuan }}</td>
                                         </tr> --}}
+                                        {{-- <tr>
+                                            <td class="px-0">Expired</td>
+                                            <td>:</td>
+                                            <td>{{ $penawaran->tgl_exp }}</td>
+                                        </tr> --}}
                                         <tr>
                                             <td class="px-0">Harga</td>
                                             <td>:</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\stok;
 use App\Models\Tender;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,10 +13,44 @@ class TenderController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function scheduler()
+    {
+        $today = Carbon::today();
+
+        $tenders = Tender::whereDate('tgl_tutup', $today)
+            ->with(['penawaran' => function ($query) {
+                $query->orderBy('ranking', 'desc')->first();
+            }])
+            ->get();
+
+        foreach ($tenders as $tender) {
+            if (!$tender->is_complete) {
+                $penawaran = $tender->penawaran[0];
+                $data = [
+                    'barang_id' => $tender->barang_id,
+                    'tipe' => 'masuk',
+                    // 'tipe' => json_decode($penawaran->merek)->nama . ", " . json_decode($penawaran->kualitas_select)->nama,
+                    'kuantitas' => $penawaran->kuantitas,
+                    'stok_awal' => 0,
+                    'stok_setelah_exp' => 0,
+                    'tanggal_exp' => $penawaran->tgl_exp,
+                    'tanggal' => $penawaran->tgl_masuk,
+                ];
+
+                stok::create($data);
+
+                Tender::where('id', $tender->id)->update(['is_complete' => true]);
+            }
+        }
+
+        return $tenders;
+    }
+
     public function welcome()
     {
         return view('tender-public-dashboard');
     }
+
     public function index()
     {
         return view('tender', ['tenders' => Tender::with('barang')->orderBy("created_at", "DESC")->get()]);

@@ -26,7 +26,7 @@
 
 <body class="font-sans antialiased">
     <div class="bg-black h-screen relative">
-        <img src="img/bg.png" 
+        <img src="/img/bg.png" 
             class="fixed top-0 left-0 w-full h-full object-cover blur-sm brightness-[.3]" alt="Background">
 
         {{-- @include('layouts.navigation') --}}

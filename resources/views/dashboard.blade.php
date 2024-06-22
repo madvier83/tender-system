@@ -20,8 +20,8 @@
 
                 <div class="flex gap-4 mt-8">
                     <div>
-                        <a href="/tender"
-                            class="{{ request()->is('tender*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                        <a href="/penawaran"
+                            class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
                             <div class="w-12">
                                 <img src="/img/suitcase.svg" alt="">
                             </div>
@@ -29,8 +29,8 @@
                         </a>
                     </div>
                     <div>
-                        <a href="/tender"
-                            class="{{ request()->is('tender*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                        <a href="/penawaran/active"
+                            class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
                             <div class="w-12">
                                 <img src="/img/diagram-up.svg" alt="">
                             </div>
@@ -38,8 +38,8 @@
                         </a>
                     </div>
                     <div>
-                        <a href="/penawaran"
-                            class="{{ request()->is('tender*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                        <a href="/penawaran/selesai"
+                            class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
                             <div class="w-12">
                                 <img src="/img/check.svg" alt="">
                             </div>

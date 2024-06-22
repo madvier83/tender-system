@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('kuantitas');
             $table->date('tgl_masuk');
             $table->date('tgl_pembaruan')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

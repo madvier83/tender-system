@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('kuantitas');
             $table->string('gambar')->nullable();
             $table->date('tgl_masuk');
+            $table->date('tgl_exp');
             $table->date('tgl_pembaruan')->nullable();
 
             $table->timestamps();
