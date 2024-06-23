@@ -36,7 +36,7 @@
                             </div>
                             <h2 class="text-xl">Tender Aktif</h2>
                         </a>
-                    </div>
+                </div>
                     <div>
                         <a href="/penawaran/selesai"
                             class="{{ request()->is('penawaran*') ? 'bg-violet-900' : 'bg-gray-700' }} cursor-pointer p-10 text-white flex flex-col gap-4 items-center hover:bg-purple-800 h-full rounded-xl">

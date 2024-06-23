@@ -98,13 +98,66 @@ class TenderController extends Controller
         return view('tender-show', ['tender' => $t]);
     }
 
+    // public function public()
+    // {
+
+    //     $t = Tender::where('tgl_tutup', '>', Carbon::now())->get();
+
+    //     return view('tender-public-list', ['tenders' => $t]);
+    // }
+
     public function public()
     {
+        $tenders = Tender::with('barang')->orderBy("created_at", "DESC")->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
 
-        $t = Tender::where('tgl_tutup', '>', Carbon::now())->get();
-
-        return view('tender-public-list', ['tenders' => $t]);
+        return view('tender-public-list', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
     }
+
+    public function publicAktif()
+    {
+        $tenders = Tender::with('barang')
+            ->where('tgl_tutup', '>', now())
+            ->orderBy("created_at", "DESC")
+            ->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
+
+        return view('tender-public-aktif', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
+    }
+
+    public function publicSelesai()
+    {
+        $tenders = Tender::with('barang')
+            ->where('tgl_tutup', '<', now())
+            ->orderBy("created_at", "DESC")
+            ->get();
+        $totalTendersCount = Tender::count();
+        $activeTendersCount = Tender::where('tgl_tutup', '>', now())->count();
+        $completeTendersCount = Tender::where('tgl_tutup', '<', now())->count();
+
+        return view('tender-public-selesai', [
+            'tenders' => $tenders,
+            'totalTendersCount' => $totalTendersCount,
+            'activeTendersCount' => $activeTendersCount,
+            'completeTendersCount' => $completeTendersCount
+        ]);
+    }
+
+
     public function publicShow($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {

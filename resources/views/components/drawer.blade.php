@@ -119,7 +119,7 @@
                                             d="M15.75 19.5 8.25 12l7.5-7.5" />
                                     </svg>
                                 </div>
-                                <h2 class="text-">Kembali</h2>
+                                <h2 class="text-">Keluar</h2>
                             </button>
                         </a>
                     </div>

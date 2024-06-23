@@ -10,7 +10,8 @@ class PenawaranController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */ public function index()
+     */
+    public function index()
     {
         $tenders = Tender::with('barang')->orderBy("created_at", "DESC")->get();
         $totalTendersCount = Tender::count();
