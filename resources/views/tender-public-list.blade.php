@@ -9,11 +9,12 @@
 
 
         <div class="p-8">
-            <h1 class="text-4xl font-semibold mb-4 text-white">Tender Berlangsung</h1>
+            <h1 class="text-4xl font-semibold mb-4 text-white">List Tender</h1>
             <div class="bg-gray-900 p-4 h-max rounded-xl overflow-hidden overflow-x-auto mt-8">
 
                 <div role="tablist" class="tabs tabs-boxed max-w-xl mb-4 bg-gray-800">
-                    <a href="/tender-public/list" role="tab" class="tab tab-active">Total Tender ({{ $totalTendersCount }})</a>
+                    <a href="/tender-public/list" role="tab" class="tab tab-active">Total Tender
+                        ({{ $totalTendersCount }})</a>
                     <a href="/tender-public/active" role="tab" class="tab">Tender Aktif
                         ({{ $activeTendersCount }})</a>
                     <a href="/tender-public/selesai" role="tab" class="tab">Tender Selesai
@@ -66,8 +67,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="/tender-public/{{ $tender->id }}" class="btn btn-info btn-xs">Buat
-                                        Penawaran</a>
+                                    @if ($status != 'Sudah Berakhir')
+                                        <a href="/tender-public/{{ $tender->id }}" class="btn btn-info btn-xs mr-2">Buat
+                                            Penawaran</a>
+                                    @endif
+                                    <a href="/tender-public-result/{{ $tender->id }}" class="btn btn-info bg-cyan-400 btn-xs">Lihat Pemenang</a>
+
                                 </td>
                             </tr>
                         @endforeach

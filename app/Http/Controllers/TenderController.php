@@ -158,6 +158,20 @@ class TenderController extends Controller
     }
 
 
+    public function showWinner($id)
+    {
+        $t = Tender::with(['penawaran' => function ($query) {
+            $query->orderBy('ranking', 'desc');
+        }])->where('id', $id)->get()->first();
+
+        if (is_null($t)) {
+            abort(404, 'Tender not found');
+        }
+
+        return view('tender-public-result', ['tender' => $t]);
+    }
+
+
     public function publicShow($id)
     {
         $t = Tender::with(['penawaran' => function ($query) {

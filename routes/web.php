@@ -46,6 +46,7 @@ Route::get('tender-public/active', [TenderController::class, 'publicAktif']);
 Route::get('tender-public/selesai', [TenderController::class, 'publicSelesai']);
 
 Route::get('tender-public/{id}', [TenderController::class, 'publicShow']);
+Route::get('tender-public-result/{id}', [TenderController::class, 'showWinner']);
 Route::post('tender-public/{id}', [PenawaranController::class, 'publicStore']);
 Route::get('tender-public/{id}/success', [TenderController::class, 'publicSuccess']);
 

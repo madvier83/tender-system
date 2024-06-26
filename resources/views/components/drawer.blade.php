@@ -102,7 +102,7 @@
                     </div>
                     <div>
                         <a href="/tender-public/list"
-                            class="{{ request()->is('tender-public/list*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
+                            class="{{ request()->is('tender-public/*') || request()->is('tender-public-result*') ? 'bg-violet-900' : 'bg-gray-900' }} cursor-pointer p-6 text-white flex gap-4 items-center hover:bg-purple-800 h-full rounded-xl">
                             <div class="w-8">
                                 <img src="/img/tender.svg" alt="">
                             </div>
