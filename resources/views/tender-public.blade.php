@@ -72,7 +72,7 @@
                                                     <span class="label-text">Nama vendor</span>
                                                 </div>
                                                 <input name="vendor" type="text" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full" value="{{ old('vendor') }}" />
+                                                    class="input input-bordered w-full" value="{{ old('vendor') ?? auth()->user()->name }}" />
                                                 @error('vendor')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror
@@ -92,7 +92,7 @@
                                                     <span class="label-text">Email</span>
                                                 </div>
                                                 <input name="email" type="email" placeholder="Tulis disini"
-                                                    class="input input-bordered w-full" value="{{ old('email') }}">
+                                                    class="input input-bordered w-full" value="{{ old('email') ?? auth()->user()->email  }}">
                                                 @error('email')
                                                     <p class="text-sm text-rose-400 mt-2">{{ $message }}</p>
                                                 @enderror

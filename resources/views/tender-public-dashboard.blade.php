@@ -13,7 +13,11 @@
 
                 <div class="overflow-hidden shadow-sm rounded-lg">
                     <div class="pb-6 text-white text-4xl">
-                        Welcome vendor
+                        Welcome {{ Auth::user()->name }}
+                    </div>
+
+                    <div class="text-xl pb-6">
+                        Login sebagai {{ auth()->user()->email }}
                     </div>
                 </div>
 

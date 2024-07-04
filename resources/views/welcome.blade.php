@@ -26,12 +26,12 @@
     <div class="relative w-screen h-screen">
         <img src="img/bg.png" class="absolute top-0 left-0 w-full h-full object-cover blur-sm brightness-[.3]"
             alt="Background">
-        <div class="relative z-10 flex flex-col justify-center items-center gap-16 w-full h-full">
+        <div class="relative z-10 flex flex-col justify-center items-center gap-8 w-full h-full">
             <div class="h-48 w-48 rounded-full overflow-hidden bg-white">
                 <img src="img/logo.png" alt="logo">
             </div>
-            <a href="/login" class="btn-lg text-2xl bg-white text-black font-bold px-16 py-4 rounded-full">Login</a>
-            <a href="/tender-public" class="underline">Masuk sebagai vendor</a>
+            <a href="/login" class="btn-lg text-2xl bg-white text-black font-bold px-16 py-4 rounded-full">Login sebagai admin</a>
+            <a href="/login-vendor" class="btn-lg bg-gray-800 rounded-full px-16 py-4 text-2xl text-white">Login sebagai vendor</a>
         </div>
     </div>
 </body>

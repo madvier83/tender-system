@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
+            'role' => 'ADMIN'
         ]);
 
         // Barang::factory()->count(100)->create();

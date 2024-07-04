@@ -19,7 +19,8 @@
     <div class="drawer-side">
         <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
         <div class="lg:py-8 lg:pl-8 h-screen">
-            @auth
+
+            @if (Auth::check() && Auth::user()->role == 'ADMIN')
                 <div class="p-4 w-80 bg-gray-800 text-base-content rounded-xl h-full flex flex-col gap-4">
                     <!-- Sidebar content here -->
                     <div>
@@ -110,23 +111,29 @@
                         </a>
                     </div>
                     <div class="mt-auto">
-                        <a href="/">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <h1
+                                class="bg-gray-900 cursor-pointer px-8 py-4 text-white flex items-center mb-2 h-full w-full rounded-xl">
+                                {{ auth()->user()->email }}
+                            </h1>
                             <button
                                 class="bg-gray-900 cursor-pointer px-8 py-4 text-white flex items-center hover:bg-rose-900 h-full w-full rounded-xl">
-                                <div class="w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <div class="w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                            d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                                     </svg>
                                 </div>
-                                <h2 class="text-">Keluar</h2>
+                                <h2 class="text-">Logout</h2>
                             </button>
-                        </a>
+                        </form>
                     </div>
                 </div>
             @endauth
 
-        </div>
-
     </div>
+
+</div>
 </div>
