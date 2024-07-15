@@ -23,6 +23,8 @@ return new class extends Migration
             $table->dateTime("tgl_buka");
             $table->dateTime("tgl_tutup");
             $table->boolean("is_complete")->default(false);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
